@@ -159,6 +159,7 @@ public class GameService {
         return false;
     }
 
+
     private void killAround(Player player, Ship ship) {
         for (Cell c : ship.getCellList()) {
             int x = c.getX();
@@ -201,7 +202,7 @@ public class GameService {
     public boolean gameShot(Game game) {
 
 
-        if  (alive(game.getPlayer1()) && alive(game.getPlayer2())) {
+        if (alive(game.getPlayer1()) && alive(game.getPlayer2())) {
             if (game.getStep()) {
                 if (!shot(game.getPlayer2())) {
                     game.setStep(false);

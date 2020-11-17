@@ -71,26 +71,41 @@ public class GameView extends JFrame {
         JMenu mnGame = new JMenu("Game");
         menuBar.add(mnGame);
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener( new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 gameService.gameShot(game);
-                JMenu mn;
-                if (!(gameService.alive(game.getPlayer2())) || gameService.alive(game.getPlayer1())) {
+
+                if (!(gameService.alive(game.getPlayer2())) && gameService.alive(game.getPlayer1()) ||
+                        (gameService.alive(game.getPlayer2())) && !(gameService.alive(game.getPlayer1()))) {
+//                    JMenu mn1;
+//                    mn1 = new JMenu("WIN FIRST PLAYER");
+//                    JMenu mn2;
+//                    mn2 = new JMenu("WIN SECOND PLAYER");
+
                     boolean b = gameService.gameShot((game));
                     if (b) {
                         System.out.println("Выиграл первый игрок");
+                        String message = "Выиграл игрок 1";
+                        repaint();
+                        JOptionPane.showMessageDialog(null,message);
+
+
+//                        menuBar.add(mn1);
+
                     } else {
                         System.out.println("Выиграл второй игрок");
+                        String message = "Выиграл игрок 2";
+                        repaint();
+                        JOptionPane.showMessageDialog(null,message);
+
+//                        menuBar.add(mn2);
+
                     }
-                    repaint();
+
+
                 }
-//                        mn = new JMenu("WIN FIRST PLAYER");
-//                    repaint();
-//                    } else {
-//                        mn = new JMenu("WIN SECOND PLAYER");
-//                    }
-//                    menuBar.add(mn);
+
                 repaint();}
     });
 

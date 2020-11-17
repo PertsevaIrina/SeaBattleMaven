@@ -22,6 +22,7 @@ public class Field {
 
     }
 
+
     public int getHeight() {
         return n;
     }
