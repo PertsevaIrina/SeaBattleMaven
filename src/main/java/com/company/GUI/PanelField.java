@@ -16,13 +16,13 @@ public class PanelField extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            // рисуем решётку
+            // решетка
             for (int i = 0; i < 11; i++) {
                 g.drawLine(i * 15, 0, i * 15, 150);
                 g.drawLine(0, i * 15, 150, i * 15);
             }
 
-            // рисуем элементы
+            //элементы
             for (int j = 0; j < 10; j++) {
                 for (int i = 0; i < 10; i++) {
                     paintElement(g, i, j);

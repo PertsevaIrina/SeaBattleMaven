@@ -36,7 +36,7 @@ public class GameView extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         this.setResizable(false);
-        this.setBounds(400, 300, 800, 500);
+        this.setBounds(400, 300, 375, 400);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.getContentPane().setLayout((LayoutManager) null);
 
@@ -48,15 +48,6 @@ public class GameView extends JFrame {
         panelPlayerB.setBounds(190, 31, 151, 151);
         this.getContentPane().add(panelPlayerB);
 
-//        ScoreField panelScore1 = new ScoreField(this.model, 0);
-//        panelScore1.setBounds(370, 31, 90, 151);
-//        panelScore1.setBackground(new Color(225, 225, 255));
-//        this.getContentPane().add(panelScore1);
-//
-//        ScoreField panelScore2 = new ScoreField(this.model, 1);
-//        panelScore2.setBounds(470, 31, 90, 151);
-//        panelScore2.setBackground(new Color(225, 225, 255));
-//        this.getContentPane().add(panelScore2);
 
         panel.add(button);
         this.add(panel);
