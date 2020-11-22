@@ -1,7 +1,7 @@
-package com.company.Player;
+package course2.seaBattle.model;
 
-import com.company.Objects.Field;
-import com.company.Objects.Ship;
+import course2.seaBattle.model.Field;
+import course2.seaBattle.model.Ship;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.company;
+package course2.seaBattle.model;
 
-import com.company.Logic.GameService;
-import com.company.Player.Player;
+import course2.seaBattle.model.GameService;
+import course2.seaBattle.model.Player;
 
 public class Game {
     private Player player1;
@@ -29,7 +29,8 @@ public class Game {
 
         this.player1 = new Player();
         this.player2 = new Player();
-
+        service.setField(player1);
+        service.setField(player2);
         service.setShips(player1.getField(), player1.getListOfShips());
         service.setShips(player2.getField(), player2.getListOfShips());
 

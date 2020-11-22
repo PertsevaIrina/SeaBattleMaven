@@ -1,7 +1,7 @@
-package com.company.Console;
+package course2.seaBattle.ui.consol;
 
-import com.company.Objects.Field;
-import com.company.Game;
+import course2.seaBattle.model.Field;
+import course2.seaBattle.model.Game;
 
 public class Interface {
     public static void draw(Game game) {

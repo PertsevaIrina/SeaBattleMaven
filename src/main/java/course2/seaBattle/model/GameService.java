@@ -1,17 +1,25 @@
-package com.company.Logic;
-
-import com.company.*;
-import com.company.Console.Interface;
-import com.company.Enum.Status;
-import com.company.Objects.Cell;
-import com.company.Objects.Field;
-import com.company.Objects.Ship;
-import com.company.Player.Player;
+package course2.seaBattle.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
+    public void setField(Player player) {
+        Field field = player.getField();
+        int m = field.getWidth();
+        int n = field.getHeight();
+
+        Cell[][] cells = new Cell[n][m];
+        List<Cell> list = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                cells[i][j] = new Cell(j, i);
+                list.add(cells[i][j]);
+            }
+        }
+        field.setField(cells);
+        field.setListOfCells(list);
+    }
 
     public void setShips(Field field, List<Ship> listOfShip) {
         List<Cell> listOfRandom = new ArrayList<>(field.getListOfCells());

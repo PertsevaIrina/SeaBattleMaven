@@ -1,6 +1,4 @@
-package com.company.Objects;
-
-import com.company.Enum.Status;
+package course2.seaBattle.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.company.Enum;
+package course2.seaBattle.model;
 
 public enum Status {
     EMPTY,
