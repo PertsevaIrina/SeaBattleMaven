@@ -5,12 +5,10 @@ import java.util.List;
 public class Ship {
     private int countOfDeck;
     private List<Cell> cellList;
-   // private boolean alive;
 
     public Ship(int countOfDeck, List<Cell> cellList) {
         this.countOfDeck = countOfDeck;
         this.cellList = cellList;
-        //alive = true;
     }
 
     public boolean isAlive(){

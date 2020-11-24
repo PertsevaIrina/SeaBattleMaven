@@ -6,14 +6,13 @@ import java.util.List;
 public class Field {
     private Cell[][] field;
     private int n, m;
-    private List<Cell> listOfCells = new ArrayList<>(); //список клеток доступ для обстрела
+    private List<Cell> listOfCells = new ArrayList<Cell>(); //список клеток доступ для обстрела
 
     public Field(int n, int m) {
         this.m = m;
         this.n = n;
-
-
     }
+
 
     public Field() {
         m = n = 10;

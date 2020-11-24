@@ -6,13 +6,13 @@ import java.util.List;
 public class GameService {
     public void setField(Player player) {
         Field field = player.getField();
-        int m = field.getWidth();
-        int n = field.getHeight();
+        int w = field.getWidth();
+        int h = field.getHeight();
 
-        Cell[][] cells = new Cell[n][m];
-        List<Cell> list = new ArrayList<>();
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        Cell[][] cells = new Cell[h][w];
+        List<Cell> list = new ArrayList<Cell>();
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
                 cells[i][j] = new Cell(j, i);
                 list.add(cells[i][j]);
             }
@@ -22,7 +22,7 @@ public class GameService {
     }
 
     public void setShips(Field field, List<Ship> listOfShip) {
-        List<Cell> listOfRandom = new ArrayList<>(field.getListOfCells());
+        List<Cell> listOfRandom = new ArrayList<Cell>(field.getListOfCells());
         for (int i = 0; i < 4; i++) {//ответает за тип корабля
             int countOfDeck = 4 - i;
             int n = 5;
@@ -33,7 +33,6 @@ public class GameService {
 //                }
 
                 if (listOfCell != null) {
-//                    listOfCell = copy(field, listOfCell);
                     listOfShip.add(new Ship(countOfDeck, listOfCell));
                     n = 5;
                     for (Cell c : listOfCell) {
@@ -50,8 +49,8 @@ public class GameService {
     }
 
     private List<Cell> getListOfShipCells(Field field, List<Cell> listOfRandom, int countOfDeck) {
-        List<Cell> listOfCellX = new ArrayList<>();
-        List<Cell> listOfCellY = new ArrayList<>();
+        List<Cell> listOfCellX = new ArrayList<Cell>();
+        List<Cell> listOfCellY = new ArrayList<Cell>();
         Cell cell;
         if (listOfRandom.size() > 0) {
             cell = listOfRandom.get(random(0, listOfRandom.size()));
@@ -63,54 +62,53 @@ public class GameService {
         if (countOfDeck == 1) {
             return listOfCellX;
         }
-        boolean flag1 = true;
-        boolean flag2 = true;
-        boolean flag3 = true;
-        boolean flag4 = true;
+        boolean flagRight = true;
+        boolean flagLeft = true;
+        boolean flagUp = true;
+        boolean flagDown = true;
 
         for (int k = 1; k < countOfDeck; k++) {
             Cell cellTemp = field.getCell(cell.getX() + k, cell.getY());
-            if (listOfRandom.contains(cellTemp) && flag1) {
+            if (listOfRandom.contains(cellTemp) && flagRight) {
                 listOfCellX.add(cellTemp);
                 if (listOfCellX.size() == countOfDeck) {
                     return listOfCellX;
                 }
             } else {
-                flag1 = false;
+                flagRight = false;
             }
-
             cellTemp = field.getCell(cell.getX() - k, cell.getY());
-            if (listOfRandom.contains(cellTemp) && flag2) {
+            if (listOfRandom.contains(cellTemp) && flagLeft) {
                 listOfCellX.add(cellTemp);
                 if (listOfCellX.size() == countOfDeck) {
                     return listOfCellX;
                 }
             } else {
-                flag2 = false;
+                flagLeft = false;
             }
             cellTemp = field.getCell(cell.getX(), cell.getY() + k);
-            if (listOfRandom.contains(cellTemp) && flag3) {
+            if (listOfRandom.contains(cellTemp) && flagUp) {
                 listOfCellY.add(cellTemp);
                 if (listOfCellY.size() == countOfDeck) {
                     return listOfCellY;
                 }
             } else {
-                flag3 = false;
+                flagUp = false;
             }
-
             cellTemp = field.getCell(cell.getX(), cell.getY() - k);
-            if (listOfRandom.contains(cellTemp) && flag4) {
+            if (listOfRandom.contains(cellTemp) && flagDown) {
                 listOfCellY.add(cellTemp);
                 if (listOfCellY.size() == countOfDeck) {
                     return listOfCellY;
                 }
             } else {
-                flag4 = false;
+                flagDown = false;
             }
         }
         return null;
     }
 
+//удаляем клетки из списка при расстановке кораблей
     private void removeCells(Field field, List<Cell> listOfRandom, List<Cell> listOfCell) {
         for (Cell c : listOfCell) {
             int x = c.getX();
@@ -125,35 +123,29 @@ public class GameService {
             }
         }
     }
-
-    public static List<Cell> copy(Field field, List<Cell> list) {
-        List<Cell> copy = new ArrayList<>();
-        for (Cell c : list) {
-            copy.add(field.getCell(c.getX(), c.getY()));
-        }
-        return copy;
-    }
+//
+//    public static List<Cell> copy(Field field, List<Cell> list) {
+//        List<Cell> copy = new ArrayList<Cell>();
+//        for (Cell c : list) {
+//            copy.add(field.getCell(c.getX(), c.getY()));
+//        }
+//        return copy;
+//    }
 
     public boolean process(Game game) {
-
-
         while (alive(game.getPlayer1()) && alive(game.getPlayer2())) {
             if (game.getStep()) {
                 if (!shot(game.getPlayer2())) {
                     game.setStep(false);
 //                    Interface.draw(game);
-
                 }
             } else {
                 if (!shot(game.getPlayer1())) {
                     game.setStep(true);
 //                    Interface.draw(game);
                 }
-
             }
-
         }
-
         return game.getStep();
     }
 
@@ -167,7 +159,7 @@ public class GameService {
         return false;
     }
 
-
+//удаляем клетки вокруг мертвого корабля
     private void killAround(Player player, Ship ship) {
         for (Cell c : ship.getCellList()) {
             int x = c.getX();
@@ -177,7 +169,6 @@ public class GameService {
                     Cell cell = player.getField().getCell(x + i, y + j);
                     if (player.getField().getListOfCells().contains(cell)) {
                         player.getField().removeCell(cell);
-
                         if (cell.getStatus() == Status.EMPTY) {
                             cell.setStatus(Status.MISS);
                         }
@@ -188,7 +179,6 @@ public class GameService {
     }
 
     private boolean shot(Player player) {
-
         Cell cell = player.getField().getListOfCells().remove(random(0, player.getField().getListOfCells().size()));
         if (cell.getStatus() == Status.SHIP) {
             cell.setStatus(Status.INJURED);
@@ -204,25 +194,19 @@ public class GameService {
             cell.setStatus(Status.MISS);
         }
         return false;
-
     }
 
     public boolean gameShot(Game game) {
-
-
         if (alive(game.getPlayer1()) && alive(game.getPlayer2())) {
             if (game.getStep()) {
                 if (!shot(game.getPlayer2())) {
                     game.setStep(false);
-
                 }
             } else {
                 if (!shot(game.getPlayer1())) {
                     game.setStep(true);
                 }
-
             }
-
         }
         return game.getStep();
     }

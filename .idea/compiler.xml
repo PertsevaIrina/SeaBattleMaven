@@ -9,6 +9,8 @@
         <module name="SeaBattleMaven" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="SeaBattleMaven" target="6" />
+    </bytecodeTargetLevel>
   </component>
 </project>

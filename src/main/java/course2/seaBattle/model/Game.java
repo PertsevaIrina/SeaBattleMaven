@@ -33,7 +33,5 @@ public class Game {
         service.setField(player2);
         service.setShips(player1.getField(), player1.getListOfShips());
         service.setShips(player2.getField(), player2.getListOfShips());
-
-
     }
 }

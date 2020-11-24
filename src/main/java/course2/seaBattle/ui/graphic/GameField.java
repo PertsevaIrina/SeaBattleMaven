@@ -48,7 +48,7 @@ public class GameField extends JPanel {
         }
     }
 
-    private Color getColorByStateElement(Status state) {
+    private Color ColorOfElement(Status state) {
         switch (state) {
             case EMPTY:
             case MISS:
@@ -70,8 +70,8 @@ public class GameField extends JPanel {
         } else {
             state = game.getPlayer2().getField().getCell(i, j).getStatus();
         }
-        g.setColor(getColorByStateElement(state));
-        g.fillRect(i * cellSize + 1, j * cellSize + 1, cellSize, cellSize);
+        g.setColor(ColorOfElement(state));
+        g.fillRect(i * cellSize , j * cellSize , cellSize, cellSize);
         if (state == Status.MISS || state == Status.INJURED) {
             drawX(g, i, j);
         }

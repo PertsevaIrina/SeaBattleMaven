@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Player {
     private Field field;
-    private List<Ship> listOfShips = new ArrayList<>();
+    private List<Ship> listOfShips = new ArrayList<Ship>();
 
     public Player() {
         this.field = new Field();

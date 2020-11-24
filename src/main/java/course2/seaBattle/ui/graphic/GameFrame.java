@@ -14,7 +14,7 @@ public class GameFrame extends JFrame {
     private Button buttonShot;
     private Button buttonGame;
     private JLabel jl;
-    private int cellSize = 20;
+    private int cellSize = 40;
 
     public GameFrame(Game game, GameService service) {
         this.game = game;
@@ -37,19 +37,17 @@ public class GameFrame extends JFrame {
         gameField1.setBounds(20, 50, f1W, f1H);
         this.add(gameField1);
 
-
         GameField gameField2 = new GameField(this.game, 1, cellSize);
         int f2W = gameField2.getW() * cellSize + 1;
         int f2H = gameField2.getH() * cellSize + 1;
         gameField2.setBounds(f1W + 40, 50, f2W, f2H);
         this.add(gameField2);
 
-
-        this.setBounds(400, 300, f1W + f2W + 60, Math.max(f1H, f2H) + 100);
+        this.setBounds(400, 300, f1W + f2W + 70, Math.max(f1H, f2H) + 100);
         panel.add(buttonShot);
         panel.add(buttonGame);
-        buttonShot.setBounds(80, 200, 50, 20);
-        buttonGame.setBounds(20, 200, 50, 20);
+        buttonShot.setBounds(20, 200, 70, 20);
+        buttonGame.setBounds(20, 200, 70, 20);
         panel.add(jl);
         this.add(panel);
 
