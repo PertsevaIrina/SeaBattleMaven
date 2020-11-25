@@ -43,12 +43,12 @@ public class GameField extends JPanel {
         //элементы
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
-                paintElement(g, i, j);
+                drawCell(g, i, j);
             }
         }
     }
 
-    private Color ColorOfElement(Status state) {
+    private Color ColorOfCell(Status state) {
         switch (state) {
             case EMPTY:
             case MISS:
@@ -63,14 +63,14 @@ public class GameField extends JPanel {
     }
 
 
-    private void paintElement(Graphics g, int i, int j) {
+    private void drawCell(Graphics g, int i, int j) {
         Status state;
         if (player == 0) {
             state = game.getPlayer1().getField().getCell(i, j).getStatus();
         } else {
             state = game.getPlayer2().getField().getCell(i, j).getStatus();
         }
-        g.setColor(ColorOfElement(state));
+        g.setColor(ColorOfCell(state));
         g.fillRect(i * cellSize , j * cellSize , cellSize, cellSize);
         if (state == Status.MISS || state == Status.INJURED) {
             drawX(g, i, j);
