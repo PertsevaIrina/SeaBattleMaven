@@ -11,6 +11,10 @@ public class Ship {
         this.cellList = cellList;
     }
 
+    public void setCellList(List<Cell> cellList) {
+        this.cellList = cellList;
+    }
+
     public boolean isAlive(){
         for (Cell c : cellList) {
             if (c.getStatus() == Status.SHIP) {

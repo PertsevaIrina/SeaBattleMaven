@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Field {
-    private Cell[][] field;
+    private Cell[][] cells;
     private int n, m;
-    private List<Cell> listOfCells = new ArrayList<Cell>(); //список клеток доступ для обстрела
+    private transient List<Cell> listOfCells = new ArrayList<Cell>(); //список клеток доступ для обстрела
 
     public Field(int n, int m) {
         this.m = m;
@@ -26,8 +26,8 @@ public class Field {
         return m;
     }
 
-    public void setField(Cell[][] field) {
-        this.field = field;
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
     }
 
     public void setListOfCells(List<Cell> listOfCells) {
@@ -43,7 +43,7 @@ public class Field {
         if (x < 0 || y < 0 || x >= m || y >= n) {
             return null;
         }
-        return field[y][x];
+        return cells[y][x];
     }
 
     public void removeCell(int index) {

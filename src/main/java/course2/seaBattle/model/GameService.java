@@ -17,7 +17,7 @@ public class GameService {
                 list.add(cells[i][j]);
             }
         }
-        field.setField(cells);
+        field.setCells(cells);
         field.setListOfCells(list);
     }
 

@@ -1,7 +1,9 @@
 package course2.seaBattle.ui.graphic;
 
+import course2.seaBattle.SerializeService;
 import course2.seaBattle.model.Game;
 import course2.seaBattle.model.GameService;
+import course2.seaBattle.ui.consol.Interface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +13,11 @@ import java.awt.event.ActionListener;
 public class GameFrame extends JFrame {
     private Game game;
     private GameService gameService;
+    private SerializeService ss = new SerializeService();
     private Button buttonShot;
     private Button buttonGame;
+    private Button buttonSerialize;
+    private Button buttonDeserialize;
     private JLabel jl;
     private int cellSize = 40;
 
@@ -24,9 +29,16 @@ public class GameFrame extends JFrame {
 
     private void setup() {
         this.setTitle("SeaBattle");
-        jl = new JLabel("Turn player 1");
+        jl = new JLabel();
+        if (game.getStep()) {
+            jl.setText("Turn player 1");
+        } else {
+            jl.setText("Turn player 2");
+        }
         buttonShot = new Button("Shot");
         buttonGame = new Button("New Game");
+        buttonSerialize = new Button("Save");
+        buttonDeserialize = new Button("Load");
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         this.setResizable(false);
@@ -46,8 +58,8 @@ public class GameFrame extends JFrame {
         this.setBounds(400, 300, f1W + f2W + 70, Math.max(f1H, f2H) + 100);
         panel.add(buttonShot);
         panel.add(buttonGame);
-        buttonShot.setBounds(20, 200, 70, 20);
-        buttonGame.setBounds(20, 200, 70, 20);
+        panel.add(buttonSerialize);
+        panel.add(buttonDeserialize);
         panel.add(jl);
         this.add(panel);
 
@@ -69,6 +81,7 @@ public class GameFrame extends JFrame {
                     }
                 }
                 repaint();
+                Interface.draw(game.getPlayer1().getField());
             }
         });
 
@@ -76,15 +89,27 @@ public class GameFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 //                game = new Game();
-                newGame();
+                newGame(new Game());
             }
         });
 
+        buttonSerialize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ss.serialize(game);
+            }
+        });
+        buttonDeserialize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               newGame(ss.deserialize());
+            }
+        });
     }
 
-    private void newGame() {
+    private void newGame(Game game) {
 //        this = new GameFrame(new Game(), gameService);
-        GameFrame gf = new GameFrame(new Game(), gameService);
+        GameFrame gf = new GameFrame(game, gameService);
         gf.setVisible(true);
         dispose();
 //        setup();
